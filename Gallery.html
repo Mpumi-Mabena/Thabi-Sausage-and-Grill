@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Thabi's Sausage and Grill</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+    <style>
+        /* Base styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #faf3e0; /* Light cream background */
+        }
+        h1 {
+            background-color: #e17055; /* Soft warm orange */
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: #e17055; /* Soft warm orange for links */
+            margin-right: 15px;
+        }
+        nav a:hover {
+            color: #d84315; /* Deep orange on hover */
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .gallery-item {
+            margin: 20px;
+            text-align: center;
+        }
+        .gallery img, .gallery video {
+            width: 300px; /* Consistent width for images and videos */
+            height: 200px; /* Consistent height for images and videos */
+            object-fit: cover; /* Ensures the content fits well within the defined dimensions */
+            border: 3px solid #ffab91; /* Light peach border */
+        }
+        /* Adjusted Logo Styling */
+        .gallery-item img.logo {
+            width: 400px; /* Wider logo */
+            height: auto; /* Maintain aspect ratio for the logo */
+        }
+        p {
+            color: #6d4c41; /* Warm brown for text */
+        }
+        ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .Footer {
+            background-color: #e17055; /* Soft warm orange */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        /* Lightbox Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .mySlides {
+            display: none;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+        }
+        .next {
+            right: 0;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .caption-container {
+            text-align: center;
+            background-color: black;
+            padding: 2px 16px;
+            color: white;
+        }
+        .demo {
+            opacity: 0.6;
+        }
+        .active, .demo:hover {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 6vw;
+            }
+
+            .gallery {
+                flex-direction: column; /* Stack images vertically on smaller screens */
+                align-items: center;
+            }
+
+            .gallery img, .gallery video {
+                width: 100%; /* Full width images */
+                height: auto; /* Maintain aspect ratio */
+            }
+
+            .gallery-item img.logo {
+                width: 100%; /* Full width logo */
+            }
+
+            nav a {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .Footer {
+                font-size: 4vw;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .gallery img, .gallery video {
+                width: 80%; /* Resize for tablet */
+            }
+
+            .gallery-item img.logo {
+                width: 80%; /* Resize logo for tablets */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="Thabi's Sausage and Grill.html">Introduction</a>
+            <a href="home.html">Home</a>
+            <a href="Products and Services.html">Products and Services</a>
+            <a href="About Us.html">About Us</a>
+            <a href="Contact Us.html">Contact Us</a>
+        </nav>
+
+        <h1>Gallery</h1>
+        
+        <div class="gallery">
+            <!-- Gallery Item 1: Logo Image (Wider) -->
+            <div class="gallery-item">
+                <img class="logo hover-shadow cursor" src="Images/Logo.jpeg" alt="Thabi's Sausage and Grill Logo" onclick="openModal();currentSlide(1)">
+                <p class="about-us-text">The business has been established with the intention of making profit in the food sector.</p>
+            </div>
+
+            <!-- Gallery Item 2: Image -->
+            <div class="gallery-item">
+                <img class="hover-shadow cursor" src="Images/IMG_0987.JPG" alt="Product Image 1" onclick="openModal();currentSlide(2)">
+                <p class="product-info">Thabi’s Sausage and Grill offers a wide range of food products, including:</p>
+                <ul>
+                    <li>Burgers</li>
+                    <li>Kota’s</li>
+                    <li>Boerewors Rolls</li>
+                    <li>Fries</li>
+                    <li>Pap n Vleis (only served as a special)</li>
+                    <li>Dagwood</li>
+                    <li>Vegan Special (on Thursday)</li>
+                </ul>
+            </div>
+
+            <!-- Gallery Item 3: Image -->
+            <div class="gallery-item">
+                <img class="hover-shadow cursor" src="Images/IMG_1008.JPG" alt="Product Image 3" onclick="openModal();currentSlide(3)">
+            </div>
+
+            <!-- Gallery Item 4: Image -->
+            <div class="gallery-item">
+                <img class="hover-shadow cursor" src="Images/IMG_2295.JPG" alt="Product Image 4" onclick="openModal();currentSlide(4)">
+            </div>
+
+            <!-- Gallery Item 5: Image -->
+            <div class="gallery-item">
+                <img class="hover-shadow cursor" src="Images/Burger.JPG" alt="Product Image 5" onclick="openModal();currentSlide(5)">
+            </div>
+        </div>
+
+        <!-- Lightbox Modal -->
+        <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+                <div class="mySlides">
+                    <img src="Images/Logo.jpeg" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <img src="Images/IMG_0987.JPG" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <img src="Images/IMG_1008.JPG" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <img src="Images/IMG_2295.JPG" style="width:100%">
+                </div>
+
+                <div class="mySlides">
+                    <img src="Images/Burger.JPG" style="width:100%">
+                </div>
+
+                <!-- Navigation buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="Footer">
+            <p>&copy; 2024 Thabi's Sausage and Grill. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Lightbox Modal Functionality
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        // JavaScript to handle responsiveness
+        window.addEventListener('resize', adjustGalleryLayout);
+
+        function adjustGalleryLayout() {
+            const screenWidth = window.innerWidth;
+            const galleryItems = document.querySelectorAll('.gallery-item img, .gallery-item video');
+            
+            if (screenWidth < 768) {
+                galleryItems.forEach(item => {
+                    item.style.width = '100%';
+                    item.style.height = 'auto';
+                });
+            } else if (screenWidth >= 768 && screenWidth <= 1024) {
+                galleryItems.forEach(item => {
+                    item.style.width = '80%';
+                    item.style.height = 'auto';
+                });
+            } else {
+                galleryItems.forEach(item => {
+                    item.style.width = '300px'; // Reset for larger screens
+                    item.style.height = '200px';
+                });
+            }
+        }
+
+        // Call the function on initial load
+        adjustGalleryLayout();
+    </script>
+</body>
+</html>
