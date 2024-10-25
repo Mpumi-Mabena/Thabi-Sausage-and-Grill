@@ -1,0 +1,231 @@
+<?php
+// Form submission handling
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format";
+    } else {
+        // Email setup
+        $to = "josia290404@Gmail.com";  // Replace with your actual email address
+        $headers = "From: " . $email . "\r\n";
+        $headers .= "Reply-To: " . $email . "\r\n";
+        $fullMessage = "You have received a new message from the contact form on your website.\n\n";
+        $fullMessage .= "Name: $name\n";
+        $fullMessage .= "Email: $email\n";
+        $fullMessage .= "Subject: $subject\n\n";
+        $fullMessage .= "Message:\n$message";
+
+        // Send email
+        if (mail($to, $subject, $fullMessage, $headers)) {
+            $success = "Message sent successfully!";
+        } else {
+            $error = "Failed to send message. Please try again later.";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Get in touch with Thabi's Sausage and Grill. Contact us today for catering services, bookings, or questions."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Thabi's Sausage and Grill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fae3d9; /* Warm light cream background */
+        }
+        h1, h2 {
+            color: #6d4c41; /* Warm brown for headings */
+        }
+        h1 {
+            background-color: #e17055; /* Soft warm orange */
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            text-shadow: 2px 2px 5px #d84315; /* Deep orange shadow */
+        }
+        p {
+            font-size: 16px;
+            font-family: serif;
+            line-height: 1.5;
+            color: #6d4c41; /* Warm brown for text */
+        }
+        nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #e17055; /* Soft warm orange for links */
+            margin-right: 15px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+            color: #d84315; /* Deep orange on hover */
+        }
+        form {
+            max-width: 600px;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #6d4c41; /* Warm brown for labels */
+        }
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #e17055; /* Soft warm orange */
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #d84315; /* Deep orange on hover */
+        }
+        .contact-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .contact-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .contact-info li {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #6d4c41; /* Warm brown for contact details */
+        }
+        .contact-info i {
+            margin-right: 10px;
+            color: #e17055; /* Soft warm orange for icons */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .content, .contact-info, .navigation {
+            width: 100%;
+            max-width: 1200px;
+        }
+        .Footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+        }
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            h1, h2 {
+                font-size: 24px;
+            }
+            form {
+                width: 100%;
+                padding: 15px;
+            }
+            .contact-info li {
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            nav a {
+                display: block;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+            input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+            }
+            .contact-info li {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="navigation">
+            <nav>
+                <a href="Thabi's Sausage and Grill.html">Introduction</a>
+                <a href="home.html">Home</a>
+                <a href="Products and Services.html">Products and Services</a>
+                <a href="About Us.html">About Us</a>
+                <a href="Contact Us.html">Contact Us</a>
+                <a href="Gallery.html">Gallery</a>
+            </nav>
+        </div>
+
+        <div class="content">
+            <h1>Contact Us</h1>
+            <p>If you have any questions or need more information, feel free to reach out to us through the contact form below or through our contact details.</p>
+
+            <!-- Display Success or Error Message -->
+            <?php if (isset($success)): ?>
+                <p style="color: green;"><?= $success; ?></p>
+            <?php elseif (isset($error)): ?>
+                <p style="color: red;"><?= $error; ?></p>
+            <?php endif; ?>
+
+            <form action="" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+
+                <input type="submit" value="Send Message">
+            </form>
+        </div>
+        
+        <div class="contact-info">
+            <h2>Contact Details</h2>
+            <ul>
+                <li><i class="fas fa-phone"></i>068 038 0071 (Call)</li>
+                <li><i class="fab fa-whatsapp"></i>084 533 4451 (WhatsApp)</li>
+                <li><i class="fab fa-instagram"></i>Thabang_phala (Instagram)</li>
+            </ul>
+        </div>
+        
+        <div class="Footer">
+            <p>&copy; 2024 Thabi's Sausage and Grill. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
